@@ -1,95 +1,139 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service - ExpenseTracker</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 20px;
-      line-height: 1.7;
-      color: #333;
-    }
-    h1, h2 { color: #111; }
-    a { color: #2563eb; }
-    footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #ddd;
-      color: #666;
-      font-size: 14px;
-    }
-  </style>
+  <title>Terms of Service — ExpenseTracker</title>
+  <meta name="description" content="Terms of Service for the personal ExpenseTracker application.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('et-theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
+  <link rel="stylesheet" href="./assets/site.css">
 </head>
+
 <body>
-  <h1>Terms of Service</h1>
-  <p><strong>Last updated:</strong> October 18, 2026</p>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <p>
-    These Terms of Service govern your use of ExpenseTracker,
-    a personal application designed to help track expenses using
-    information retrieved from your Gmail account.
-  </p>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./index.html">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#24507e"/><rect x="6" y="9" width="11" height="4" rx="2" fill="#8db8e8"/><rect x="18.5" y="9" width="7.5" height="4" rx="2" fill="#f0c06a"/><rect x="6" y="15" width="6" height="4" rx="2" fill="#8fd3ad"/><rect x="13.5" y="15" width="12.5" height="4" rx="2" fill="#e8edf5"/><rect x="6" y="21" width="15" height="4" rx="2" fill="#e8edf5" opacity=".55"/></svg>
+        ExpenseTracker
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./index.html#how">How it works</a>
+        <a href="./index.html#tour">The app</a>
+        <a href="./index.html#privacy">Privacy</a>
+        <a href="./setup.html">Setup guide</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+        <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+      </button>
+    </div>
+  </header>
 
-  <h2>1. Personal Use</h2>
-  <p>
-    ExpenseTracker is provided for personal use. You are responsible
-    for ensuring that your use of the application complies with
-    applicable laws and the terms of any third-party services you use.
-  </p>
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <h1>Terms of Service</h1>
+        <p>The terms for using ExpenseTracker, a personal, local-first expense tracker.</p>
+      </div>
+    </section>
 
-  <h2>2. Gmail Access</h2>
-  <p>
-    The application may request authorization to access specific
-    information in your Google account through the Gmail API.
-    You can revoke this authorization at any time through your
-    <a href="https://myaccount.google.com/permissions">
-      Google Account permissions
-    </a>.
-  </p>
+    <div class="wrap prose-layout">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol>
+          <li><a href="#personal">Personal use</a></li>
+          <li><a href="#gmail">Gmail access</a></li>
+          <li><a href="#warranty">No warranty</a></li>
+          <li><a href="#financial">Financial information</a></li>
+          <li><a href="#liability">Limitation of liability</a></li>
+          <li><a href="#changes">Changes</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ol>
+      </nav>
 
-  <h2>3. No Warranty</h2>
-  <p>
-    ExpenseTracker is provided "as is", without warranties of any kind.
-    We do not guarantee that the application will always be available,
-    accurate, or error-free.
-  </p>
+      <article class="prose">
+        <p class="meta">Last updated: October 18, 2026</p>
 
-  <h2>4. Financial Information</h2>
-  <p>
-    ExpenseTracker is a tracking tool intended for informational
-    purposes only. You are responsible for verifying the accuracy
-    of extracted transactions and financial calculations.
-    The application does not provide financial, tax, or legal advice.
-  </p>
+        <p>
+          These Terms of Service govern your use of ExpenseTracker, a personal application that helps
+          track expenses using payment notifications retrieved from your Gmail account.
+        </p>
 
-  <h2>5. Limitation of Liability</h2>
-  <p>
-    To the extent permitted by applicable law, the application
-    provider shall not be liable for damages resulting from the use
-    of, or inability to use, ExpenseTracker.
-  </p>
+        <h2 id="personal">1. Personal use</h2>
+        <p>
+          ExpenseTracker is provided for personal use and runs on your own computer. You are responsible
+          for making sure your use complies with applicable laws and with the terms of any third-party
+          services you connect, including Google and LM Studio.
+        </p>
 
-  <h2>6. Changes to These Terms</h2>
-  <p>
-    These Terms of Service may be updated from time to time.
-    Any changes will be published on this page.
-  </p>
+        <h2 id="gmail">2. Gmail access</h2>
+        <p>
+          The application requests read-only access to your Gmail account through the Gmail API. You can
+          revoke this access at any time from your
+          <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">Google Account permissions</a>.
+          How that data is handled is described in the <a href="./privacy.html">Privacy Policy</a>.
+        </p>
 
-  <h2>7. Contact</h2>
-  <p>
-    For questions about these terms, use the contact email address
-    provided in the application's Google Auth Platform branding
-    settings.
-  </p>
+        <h2 id="warranty">3. No warranty</h2>
+        <p>
+          ExpenseTracker is provided "as is", without warranties of any kind. It is not guaranteed to be
+          available, accurate or error-free.
+        </p>
 
-  <footer>
-    <a href="./index.html">Home</a> |
-    <a href="./privacy.html">Privacy Policy</a>
+        <h2 id="financial">4. Financial information</h2>
+        <p>
+          ExpenseTracker is a tracking tool for informational purposes only. Amounts, merchants and
+          categories are extracted automatically, partly with a language model, and can be wrong. You are
+          responsible for checking extracted transactions and any totals. The application does not
+          provide financial, tax or legal advice.
+        </p>
+
+        <h2 id="liability">5. Limitation of liability</h2>
+        <p>
+          To the extent permitted by applicable law, the application provider is not liable for damages
+          resulting from the use of, or inability to use, ExpenseTracker.
+        </p>
+
+        <h2 id="changes">6. Changes to these terms</h2>
+        <p>
+          These terms may be updated from time to time. Changes are published on this page, and the date
+          at the top shows the latest revision.
+        </p>
+
+        <h2 id="contact">7. Contact</h2>
+        <p>
+          For questions about these terms, contact the application owner at the support email address
+          shown on the Google consent screen.
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span data-year>2026</span> ExpenseTracker. A personal, local-first project.</p>
+      <nav aria-label="Footer">
+        <a href="./setup.html">Setup guide</a>
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html" aria-current="page">Terms of Service</a>
+      </nav>
+    </div>
   </footer>
+
+  <script src="./assets/theme.js"></script>
 </body>
 </html>

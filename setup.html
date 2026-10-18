@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup guide — ExpenseTracker</title>
+  <meta name="description" content="Install ExpenseTracker on Windows 11: connect Gmail read-only, load the local model and run your first sync.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('et-theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
+  <link rel="stylesheet" href="./assets/site.css">
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./index.html">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#24507e"/><rect x="6" y="9" width="11" height="4" rx="2" fill="#8db8e8"/><rect x="18.5" y="9" width="7.5" height="4" rx="2" fill="#f0c06a"/><rect x="6" y="15" width="6" height="4" rx="2" fill="#8fd3ad"/><rect x="13.5" y="15" width="12.5" height="4" rx="2" fill="#e8edf5"/><rect x="6" y="21" width="15" height="4" rx="2" fill="#e8edf5" opacity=".55"/></svg>
+        ExpenseTracker
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./index.html#how">How it works</a>
+        <a href="./index.html#tour">The app</a>
+        <a href="./index.html#privacy">Privacy</a>
+        <a href="./setup.html" aria-current="page">Setup guide</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+        <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <h1>Setup guide</h1>
+        <p>Install ExpenseTracker on Windows 11, connect Gmail read-only, load the local model and run your first sync. All commands run in PowerShell from the repository root.</p>
+      </div>
+    </section>
+
+    <div class="wrap prose-layout">
+      <nav class="toc" aria-label="On this page">
+        <p>On this page</p>
+        <ol>
+          <li><a href="#prerequisites">Prerequisites</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="#model">Local model</a></li>
+          <li><a href="#gmail">Gmail access</a></li>
+          <li><a href="#first-run">First run</a></li>
+          <li><a href="#schedule">Scheduled sync</a></li>
+          <li><a href="#commands">Commands</a></li>
+          <li><a href="#settings">Settings</a></li>
+          <li><a href="#demo">Demo mode</a></li>
+        </ol>
+      </nav>
+
+      <article class="prose">
+        <h2 id="prerequisites">Prerequisites</h2>
+        <ul>
+          <li><strong>Windows 11</strong> with PowerShell.</li>
+          <li><strong>Node.js 24 LTS</strong> and npm 11. Check with <code>node --version</code>.</li>
+          <li><strong>LM Studio</strong> with its local server enabled. It listens on <code>http://127.0.0.1:1234</code>.</li>
+          <li>A <strong>GPU with about 3 GB of free VRAM</strong> for the default model.</li>
+          <li>A <strong>Google account</strong> that receives your isybank payment notifications.</li>
+        </ul>
+
+        <h2 id="install">Install</h2>
+        <pre class="term">npm ci
+copy .env.example .env     <span class="c"># then edit only the values you need</span>
+npm run check              <span class="c"># format, lint, typecheck, tests, build</span></pre>
+
+        <h2 id="model">Local model</h2>
+        <p>The default model for both extraction and category suggestions is <code>mistralai/ministral-3-3b</code>: about 2.15 GB on disk and 2.8 GB of VRAM.</p>
+        <pre class="term">lms get mistralai/ministral-3-3b
+lms load mistralai/ministral-3-3b --context-length 4096 --gpu max
+lms ls                      <span class="c"># the model must be listed</span>
+npm run worker -- health    <span class="c"># checks LM Studio and the model ID</span></pre>
+        <p>You can also start LM Studio and load the model from the app: open <strong>Stato e impostazioni</strong> and choose <strong>Avvia LM Studio e carica il modello</strong>. If the <code>lms</code> command lives somewhere unusual, set <code>ET_LMS_PATH</code>.</p>
+
+        <h2 id="gmail">Gmail access</h2>
+        <p>You do this once. ExpenseTracker uses your own Google Cloud project, so no one else ever holds a token for your mailbox.</p>
+        <ol>
+          <li>In the <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud console</a>, create a project and enable the <strong>Gmail API</strong>.</li>
+          <li>Under <strong>Google Auth platform → Branding</strong>, enter an app name and support email. Under <strong>Audience</strong>, choose <strong>External</strong> and add your Gmail address as a test user.</li>
+          <li>Under <strong>Clients</strong>, create a client with application type <strong>Desktop app</strong> and download the JSON file.</li>
+          <li>Save it as <code>secrets\credentials.json</code>. This folder is Git-ignored.</li>
+          <li>Run <code>npm run worker -- auth</code>, open the printed address and approve <strong>read-only</strong> access. The token is saved to <code>secrets\token.json</code>.</li>
+        </ol>
+        <p>You can also connect from the app with <strong>Collega Gmail</strong> in <strong>Stato e impostazioni</strong>.</p>
+        <div class="notice">
+          While the consent screen is in <strong>Testing</strong>, Google expires the token after 7 days and syncs will report a <code>gmail_auth</code> error. Set the publishing status to <strong>In production</strong> to avoid weekly re-authorization. The app can stay unverified for personal use.
+        </div>
+
+        <h2 id="first-run">First run</h2>
+        <pre class="term">npm run worker -- sync --dry-run   <span class="c"># shows what would be processed, writes nothing</span>
+npm run worker -- sync             <span class="c"># first run looks back 90 days</span>
+npm run worker -- status
+npm run build; npm run api         <span class="c"># open http://127.0.0.1:4318</span></pre>
+
+        <h2 id="schedule">Scheduled sync</h2>
+        <p>Run a few manual syncs first and check that <code>status</code> looks right. Then register an hourly task for your user only:</p>
+        <pre class="term">schtasks /Create /TN "ExpenseTracker sync" /SC HOURLY /RL LIMITED /F `
+  /TR "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$PWD\scripts\scheduled-sync.ps1\""
+schtasks /Run /TN "ExpenseTracker sync"      <span class="c"># test it once</span>
+Get-Content .\logs\scheduled-sync.log -Tail 5</pre>
+
+        <h2 id="commands">Commands</h2>
+        <div class="table-scroll">
+          <table class="data">
+            <thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>worker -- sync [--dry-run] [--since YYYY-MM-DD]</code></td><td>Fetch and process new notifications. <code>--since</code> re-reads an older range; duplicates are ignored.</td></tr>
+              <tr><td><code>worker -- reprocess [--status …] [--limit N]</code></td><td>Re-run extraction on stored messages without contacting Gmail.</td></tr>
+              <tr><td><code>worker -- status</code></td><td>Message counts by status and the latest runs.</td></tr>
+              <tr><td><code>worker -- health</code></td><td>Checks configuration, database, Gmail files, LM Studio and the model.</td></tr>
+              <tr><td><code>worker -- backup</code></td><td>Online, integrity-checked backup to <code>data\backups</code>.</td></tr>
+              <tr><td><code>worker -- restore &lt;file&gt; --yes</code></td><td>Restore a backup. Stop the API first.</td></tr>
+              <tr><td><code>api</code></td><td>Local API and the built interface on <code>127.0.0.1:4318</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Prefix each with <code>npm run</code>.</p>
+
+        <h2 id="settings">Settings</h2>
+        <p>Everything lives in <code>.env</code> and is validated at startup. The ones you're most likely to change:</p>
+        <div class="table-scroll">
+          <table class="data">
+            <thead><tr><th scope="col">Setting</th><th scope="col">Default</th><th scope="col">Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>ET_GMAIL_QUERY</code></td><td><code>from:comunicazioni@isybank.com</code></td><td>Which messages are listed.</td></tr>
+              <tr><td><code>ET_GMAIL_ALLOWED_SENDERS</code></td><td><code>comunicazioni@isybank.com</code></td><td>Mail from anyone else is never treated as an expense.</td></tr>
+              <tr><td><code>ET_GMAIL_INITIAL_LOOKBACK_DAYS</code></td><td><code>90</code></td><td>How far back the first sync reads.</td></tr>
+              <tr><td><code>ET_EXTRACTION_MODEL</code></td><td><code>mistralai/ministral-3-3b</code></td><td>Must match <code>lms ls</code> exactly.</td></tr>
+              <tr><td><code>ET_EXTRACTION_TEMPLATES</code></td><td><code>true</code></td><td>Read known bank sentences without the model.</td></tr>
+              <tr><td><code>ET_CATEGORY_AUTO_ACCEPT</code></td><td><code>off</code></td><td>Whether model categories skip review.</td></tr>
+              <tr><td><code>ET_API_PORT</code></td><td><code>4318</code></td><td>Port for the local app. The host is always loopback.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="demo">Demo mode</h2>
+        <p>To explore the interface before connecting Gmail, seed a separate database with synthetic data:</p>
+        <pre class="term">npm run demo:seed -w @et/worker
+npm run demo                       <span class="c"># uses data\demo.db</span></pre>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span data-year>2026</span> ExpenseTracker. A personal, local-first project.</p>
+      <nav aria-label="Footer">
+        <a href="./setup.html" aria-current="page">Setup guide</a>
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms of Service</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="./assets/theme.js"></script>
+</body>
+</html>

@@ -1,223 +1,611 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ExpenseTracker is a personal expense tracking application that helps organize expenses using information from Gmail.">
-  <title>ExpenseTracker</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      color: #1f2937;
-      background: #f9fafb;
-    }
-
-    header {
-      padding: 24px 20px;
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    nav {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #111827;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: #4b5563;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .nav-links a:hover {
-      color: #2563eb;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 80px 20px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 40px 0 60px;
-    }
-
-    .hero h1 {
-      margin: 0 0 20px;
-      font-size: clamp(36px, 6vw, 56px);
-      line-height: 1.15;
-      color: #111827;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 0 auto;
-      font-size: 18px;
-      color: #6b7280;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      margin-top: 30px;
-    }
-
-    .feature {
-      padding: 28px;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-    }
-
-    .feature h2 {
-      margin-top: 0;
-      font-size: 20px;
-      color: #111827;
-    }
-
-    .feature p {
-      margin-bottom: 0;
-      color: #6b7280;
-      font-size: 15px;
-    }
-
-    footer {
-      padding: 28px 20px;
-      text-align: center;
-      background: #ffffff;
-      border-top: 1px solid #e5e7eb;
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    footer a {
-      color: #2563eb;
-      text-decoration: none;
-      margin: 0 8px;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    .footer-links {
-      margin-bottom: 12px;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        padding: 20px;
-      }
-
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      main {
-        padding: 40px 20px;
-      }
-
-      .hero {
-        padding: 30px 0 40px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-    }
-  </style>
+  <title>ExpenseTracker — Your bank emails, turned into a private ledger</title>
+  <meta name="description" content="ExpenseTracker is a local-first, privacy-first expense tracker for Windows 11. It reads your bank's payment notifications from Gmail (read-only), extracts each expense with a local AI model, and keeps everything in SQLite on your PC.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml">
+  <script>
+    (function () {
+      var t;
+      try { t = localStorage.getItem('et-theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap">
+  <link rel="stylesheet" href="./assets/site.css">
+  <link rel="stylesheet" href="./assets/home.css">
 </head>
 
 <body>
-  <header>
-    <nav>
-      <a class="logo" href="./index.html">ExpenseTracker</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-      <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="./privacy.html">Privacy Policy</a>
-        <a href="./terms.html">Terms of Service</a>
-      </div>
-    </nav>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./index.html">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#24507e"/><rect x="6" y="9" width="11" height="4" rx="2" fill="#8db8e8"/><rect x="18.5" y="9" width="7.5" height="4" rx="2" fill="#f0c06a"/><rect x="6" y="15" width="6" height="4" rx="2" fill="#8fd3ad"/><rect x="13.5" y="15" width="12.5" height="4" rx="2" fill="#e8edf5"/><rect x="6" y="21" width="15" height="4" rx="2" fill="#e8edf5" opacity=".55"/></svg>
+        ExpenseTracker
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#tour">The app</a>
+        <a href="#privacy">Privacy</a>
+        <a href="./setup.html">Setup guide</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+        <svg class="i-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="i-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Take control of your expenses.</h1>
+  <main id="main">
 
-      <p>
-        ExpenseTracker is a personal expense tracking application
-        designed to help you organize and review your expenses using
-        information from your Gmail account.
-      </p>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap">
+        <div>
+          <h1 id="hero-title">Your bank already emails you every payment. Now they add up.</h1>
+          <p class="hero-lede">
+            ExpenseTracker reads your bank's payment notifications from Gmail, pulls out the amount,
+            currency and merchant with an AI model that runs on your own PC, and files each one in a
+            private ledger you can search, review and export.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="./setup.html">Set it up on Windows</a>
+            <a class="btn btn-quiet" href="#how">See how it works</a>
+          </div>
+          <ul class="hero-facts">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Read-only Gmail access</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No cloud AI, no telemetry</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Data stays in SQLite on your PC</li>
+          </ul>
+        </div>
+
+        <figure class="demo" id="demo" aria-label="Example: a card payment email becomes a ledger entry">
+          <article class="mail">
+            <dl class="mail-head">
+              <dt>From</dt><dd>comunicazioni@isybank.com</dd>
+              <dt>Subject</dt><dd class="subject">isybank: Pagamento con carta</dd>
+              <dt>Date</dt><dd>Sat, 17 Oct 2026 08:42:10 +0200</dd>
+            </dl>
+            <div class="mail-body">
+              <p>Gentile cliente,</p>
+              <p>
+                ti informiamo che è stato richiesto un pagamento di
+                <span class="mark m-price">23,90</span> <span class="mark m-cur">euro</span>
+                con la carta ****4821 presso <span class="mark m-merchant">FORNO ROSSI</span>, MILANO.
+              </p>
+            </div>
+          </article>
+
+          <div class="flow" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+          </div>
+
+          <dl class="fields">
+            <div class="field" data-k="price"><dt>Amount</dt><dd>23,90</dd></div>
+            <div class="field" data-k="currency"><dt>Currency</dt><dd>EUR</dd></div>
+            <div class="field" data-k="merchant"><dt>Merchant</dt><dd>FORNO ROSSI</dd></div>
+          </dl>
+
+          <div class="row">
+            <div class="row-date">sab<strong>17</strong>ott</div>
+            <div class="row-merchant">Forno Rossi</div>
+            <div class="row-amount">−23,90 €</div>
+            <div class="row-meta">
+              <span class="chip"><i class="dot" style="background: var(--c1)"></i>Cibo</span>
+              <span class="chip">Card payment, 08:42</span>
+            </div>
+            <div class="row-state"><span class="chip state-ok">Valid</span></div>
+          </div>
+
+          <button class="replay" type="button" id="replay" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+            Replay
+          </button>
+        </figure>
+      </div>
     </section>
 
-    <section id="features" class="features">
-      <article class="feature">
-        <h2>Gmail Integration</h2>
-        <p>
-          Connect your Google account to retrieve relevant email
-          information and help identify your expenses.
-        </p>
-      </article>
+    <!-- How it works -->
+    <section class="section band" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="how-title">From inbox to ledger, in six careful steps</h2>
+          <p>
+            A batch worker runs on a schedule you choose. Every step is deterministic except one, and
+            that one is checked twice before anything is saved.
+          </p>
+        </div>
 
-      <article class="feature">
-        <h2>Personal Expense Tracking</h2>
-        <p>
-          Organize and review your expenses in one place, making it
-          easier to understand your spending habits.
-        </p>
-      </article>
+        <ol class="steps">
+          <li>
+            <h3>Find the right emails</h3>
+            <p>
+              Lists only messages matching your bank's sender, from the last sync onwards with a
+              48-hour overlap. Messages already handled are skipped without being downloaded again.
+            </p>
+          </li>
+          <li>
+            <h3>Clean them up</h3>
+            <p>
+              Decodes MIME and charsets, turns HTML into plain text, cuts the footer at the bank's
+              signature and drops mail from any sender that isn't on your allow-list.
+            </p>
+          </li>
+          <li>
+            <h3>Sort by subject</h3>
+            <p>
+              Card payments, direct debits, transfers and cash withdrawals go on. Credits, failed
+              transfers, card creation and bank documents are set aside, keeping only metadata.
+            </p>
+          </li>
+          <li>
+            <h3>Read the amount and merchant</h3>
+            <p>
+              Known bank sentences are read by exact templates. Anything new goes to a small local
+              model through LM Studio, constrained to a JSON schema. Date and time always come from
+              the email header.
+            </p>
+          </li>
+          <li>
+            <h3>Check every value</h3>
+            <p>
+              The amount, currency and merchant must appear in the original text. Card numbers and
+              account references are rejected. Anything ambiguous waits in your review queue instead
+              of being guessed.
+            </p>
+          </li>
+          <li>
+            <h3>Categorize and save</h3>
+            <p>
+              Your merchant rules win, then built-in rules, then a model suggestion you confirm.
+              Each record is written in one atomic SQLite transaction, so a crash never leaves half an
+              expense behind.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-      <article class="feature">
-        <h2>Privacy First</h2>
-        <p>
-          The application is designed for personal use. Review our
-          Privacy Policy to understand how information is accessed
-          and handled.
+    <!-- Product tour -->
+    <section class="section" id="tour" aria-labelledby="tour-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="tour-title">A calm place to see where the money went</h2>
+          <p>
+            The web interface runs on your PC at <code>127.0.0.1:4318</code>, in Italian, and talks
+            only to the local API. Six screens cover everything from a monthly overview to the health
+            of the local model.
+          </p>
+        </div>
+
+        <div class="tour">
+          <div class="tabs" role="tablist" aria-label="App screens" aria-orientation="vertical">
+            <button class="tab" role="tab" id="t-over" aria-controls="p-over" aria-selected="true"><strong>Panoramica</strong><span>Monthly overview</span></button>
+            <button class="tab" role="tab" id="t-mov" aria-controls="p-mov" aria-selected="false" tabindex="-1"><strong>Movimenti</strong><span>Every transaction</span></button>
+            <button class="tab" role="tab" id="t-rev" aria-controls="p-rev" aria-selected="false" tabindex="-1"><strong>Da verificare</strong><span>Your review queue</span></button>
+            <button class="tab" role="tab" id="t-cat" aria-controls="p-cat" aria-selected="false" tabindex="-1"><strong>Categorie e regole</strong><span>Categories and merchant rules</span></button>
+            <button class="tab" role="tab" id="t-his" aria-controls="p-his" aria-selected="false" tabindex="-1"><strong>Elaborazioni</strong><span>Sync history</span></button>
+            <button class="tab" role="tab" id="t-set" aria-controls="p-set" aria-selected="false" tabindex="-1"><strong>Stato e impostazioni</strong><span>Health and connections</span></button>
+          </div>
+
+          <div>
+            <div class="screen">
+              <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i><span>127.0.0.1:4318</span></div>
+              <div class="screen-body">
+                <div class="rail" aria-hidden="true">
+                  <b>Spese</b>
+                  <span class="on" data-rail="p-over">Panoramica</span>
+                  <span data-rail="p-mov">Movimenti</span>
+                  <span data-rail="p-rev">Da verificare <em>3</em></span>
+                  <span data-rail="p-cat">Categorie</span>
+                  <span data-rail="p-his">Elaborazioni</span>
+                  <span data-rail="p-set">Stato</span>
+                </div>
+
+                <!-- Panoramica -->
+                <div class="pane" role="tabpanel" id="p-over" aria-labelledby="t-over">
+                  <div class="month-nav"><span>Mese precedente</span><span class="cur">ottobre 2026</span><span>Mese successivo</span></div>
+                  <p class="big-sentence">A ottobre hai speso 937,32 €</p>
+                  <p class="sub">18 movimenti, di cui 2 non confermati</p>
+                  <div class="ribbon" aria-hidden="true">
+                    <i style="flex: 143.8; background: var(--c1)"></i>
+                    <i style="flex: 284.1; background: var(--c2)"></i>
+                    <i style="flex: 212.4; background: var(--c3)"></i>
+                    <i style="flex: 98.5; background: var(--c4)"></i>
+                    <i style="flex: 89.9; background: var(--c5)"></i>
+                    <i style="flex: 36.65; background: var(--c6)"></i>
+                    <i style="flex: 41.97; background: var(--c7)"></i>
+                    <i style="flex: 30; background: var(--c8)"></i>
+                  </div>
+                  <table class="legend">
+                    <caption class="visually-hidden">Spending by category, October 2026</caption>
+                    <tbody>
+                      <tr><td><i class="sw" style="background: var(--c1)"></i>Cibo</td><td>143,80 €</td><td>15,3%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c2)"></i>Spesa alimentare</td><td>284,10 €</td><td>30,3%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c3)"></i>Casa e utenze</td><td>212,40 €</td><td>22,7%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c4)"></i>Trasporti</td><td>98,50 €</td><td>10,5%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c5)"></i>Shopping</td><td>89,90 €</td><td>9,6%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c6)"></i>Salute</td><td>36,65 €</td><td>3,9%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c7)"></i>Abbonamenti</td><td>41,97 €</td><td>4,5%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c8)"></i>Trasferimenti</td><td>30,00 €</td><td>3,2%</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Movimenti -->
+                <div class="pane" role="tabpanel" id="p-mov" aria-labelledby="t-mov" hidden>
+                  <h4>Movimenti</h4>
+                  <p class="sub">Search, filter and sort. Export what you see as CSV, Excel or PDF.</p>
+                  <div class="filters"><span>ottobre 2026</span><span>Tutte le categorie</span><span>Tutti i tipi</span><span>Cerca esercente</span><span>Esporta</span></div>
+                  <table class="mini-table">
+                    <thead><tr><th>Data</th><th>Esercente</th><th>Categoria</th><th class="num">Importo</th></tr></thead>
+                    <tbody>
+                      <tr><td>17/10 08:42</td><td>Forno Rossi</td><td>Cibo</td><td class="num">23,90 €</td></tr>
+                      <tr><td>16/10 19:05</td><td>Esselunga</td><td>Spesa alimentare</td><td class="num">64,37 €</td></tr>
+                      <tr><td>15/10 07:58</td><td>ATM Milano</td><td>Trasporti</td><td class="num">2,20 €</td></tr>
+                      <tr><td>14/10 00:00</td><td>Enel Energia</td><td>Casa e utenze</td><td class="num">71,40 €</td></tr>
+                      <tr><td>12/10 13:16</td><td>Farmacia Centrale</td><td>Salute</td><td class="num">12,85 €</td></tr>
+                      <tr><td>10/10 21:30</td><td>Netflix</td><td>Abbonamenti</td><td class="num">13,99 €</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Da verificare -->
+                <div class="pane" role="tabpanel" id="p-rev" aria-labelledby="t-rev" hidden>
+                  <h4>Da verificare</h4>
+                  <p class="sub">Anything the pipeline wasn't sure about. Nothing here is guessed.</p>
+                  <div class="card-list">
+                    <div class="review-card">
+                      <b>Addebito pagamento domiciliato</b>
+                      <p>Merchant missing from the model's answer. Fill it in from the email text shown beside it.</p>
+                      <div class="acts"><span class="fake-btn pri">Salva movimento</span><span class="fake-btn">Ignora email</span></div>
+                    </div>
+                    <div class="review-card">
+                      <b>AMZN Mktp IT, suggested: Shopping</b>
+                      <p>Confirm the category once and apply it to all 4 movements from this merchant, with a rule for the future.</p>
+                      <div class="acts"><span class="fake-btn pri">Conferma per tutti</span><span class="fake-btn">Scegli un'altra</span></div>
+                    </div>
+                    <div class="review-card">
+                      <b>Bonifico istantaneo, 150,00 €</b>
+                      <p>Initiated, not yet settled. Confirm once the transfer has gone through.</p>
+                      <div class="acts"><span class="fake-btn pri">Conferma</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Categorie -->
+                <div class="pane" role="tabpanel" id="p-cat" aria-labelledby="t-cat" hidden>
+                  <h4>Categorie e regole</h4>
+                  <p class="sub">An editable Italian taxonomy, plus rules that always beat the model.</p>
+                  <table class="mini-table" style="margin-bottom: 12px">
+                    <thead><tr><th>Categoria</th><th>Descrizione</th></tr></thead>
+                    <tbody>
+                      <tr><td>Cibo</td><td>Ristoranti, bar, consegne a domicilio</td></tr>
+                      <tr><td>Spesa alimentare</td><td>Supermercati, discount, mercati</td></tr>
+                      <tr><td>Casa e utenze</td><td>Affitto, luce, gas, internet</td></tr>
+                      <tr><td>Abbonamenti</td><td>Streaming, software, palestra</td></tr>
+                    </tbody>
+                  </table>
+                  <table class="mini-table">
+                    <thead><tr><th>Se l'esercente è</th><th>Allora la categoria è</th></tr></thead>
+                    <tbody>
+                      <tr><td>ESSELUNGA</td><td>Spesa alimentare</td></tr>
+                      <tr><td>NETFLIX.COM</td><td>Abbonamenti</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Elaborazioni -->
+                <div class="pane" role="tabpanel" id="p-his" aria-labelledby="t-his" hidden>
+                  <h4>Elaborazioni</h4>
+                  <p class="sub">Every sync, with what it found and what it did with it.</p>
+                  <table class="mini-table">
+                    <thead><tr><th>Avvio</th><th class="num">Email</th><th class="num">Salvati</th><th class="num">Da verificare</th><th>Esito</th></tr></thead>
+                    <tbody>
+                      <tr><td>18/10 09:00</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td>Completata</td></tr>
+                      <tr><td>18/10 08:00</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td>Completata</td></tr>
+                      <tr><td>18/10 07:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td>Completata</td></tr>
+                      <tr><td>17/10 23:00</td><td class="num">2</td><td class="num">1</td><td class="num">0</td><td>Modello non disponibile</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Stato -->
+                <div class="pane" role="tabpanel" id="p-set" aria-labelledby="t-set" hidden>
+                  <h4>Stato e impostazioni</h4>
+                  <p class="sub">Connect Gmail and start the local model without opening a terminal.</p>
+                  <dl class="kv">
+                    <dt>Gmail</dt><dd><span class="chip state-ok">Collegato</span> read-only</dd>
+                    <dt>LM Studio</dt><dd><span class="chip state-ok">In esecuzione</span> 127.0.0.1:1234</dd>
+                    <dt>Modello</dt><dd>mistralai/ministral-3-3b</dd>
+                    <dt>Database</dt><dd>data\expense-tracker.db</dd>
+                    <dt>Ultima elaborazione</dt><dd>oggi alle 09:00</dd>
+                  </dl>
+                  <div class="acts" style="display: flex; flex-wrap: wrap; gap: 6px; font-size: var(--t-xs)">
+                    <span class="fake-btn pri">Sincronizza ora</span><span class="fake-btn">Rifai l'autorizzazione</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="tour-caption" id="tour-caption">
+              The overview opens with one sentence: how much you spent this month. A ribbon and a table
+              break it down by category, with a 12-month trend and your latest movements below.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported notifications -->
+    <section class="section band" id="banks" aria-labelledby="banks-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="banks-title">Built for isybank notifications</h2>
+          <p>
+            ExpenseTracker understands these six email types today. Subjects may start with
+            <code>isybank:</code> and still match.
+          </p>
+        </div>
+
+        <div class="table-scroll">
+          <table class="data">
+            <thead>
+              <tr><th scope="col">Email subject</th><th scope="col">Saved as</th><th scope="col">Merchant is read from</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="subject">Pagamento con carta</td><td>Card payment</td><td><code>presso …</code> or <code>da …</code></td></tr>
+              <tr><td class="subject">Pagamento con carta virtuale</td><td>Virtual card payment</td><td><code>da …</code></td></tr>
+              <tr><td class="subject">Addebito pagamento domiciliato</td><td>Direct debit</td><td><code>da parte di …</code>, never the account number</td></tr>
+              <tr><td class="subject">Inserimento pagamento bonifico istantaneo</td><td>Instant transfer<br><span class="pill-note">Initiated until you confirm it</span></td><td><code>in favore di …</code> or the masked IBAN</td></tr>
+              <tr><td class="subject">Inserimento pagamento bonifico europeo</td><td>SEPA transfer<br><span class="pill-note">Initiated until you confirm it</span></td><td><code>in favore dell'IBAN …</code></td></tr>
+              <tr><td class="subject">Prelievo contanti … / Prelievo cardless del …</td><td>Cash withdrawal, filed under Contanti</td><td><code>presso …</code> or <code>cassa veloce automatica di …</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="excluded">
+          Incoming credits, failed or cancelled transfers, virtual card creation, payment reminders and
+          bank documents are recognized and left out. A payment-like subject that matches none of these
+          goes to your review queue rather than being ignored.
         </p>
-      </article>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="section" id="privacy" aria-labelledby="privacy-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="privacy-title">Your bank emails never leave your PC</h2>
+          <p>
+            ExpenseTracker talks to exactly three things. Two of them are on your own machine.
+          </p>
+        </div>
+
+        <div class="privacy-grid">
+          <figure class="netmap">
+            <svg viewBox="0 0 520 360" role="img" aria-labelledby="net-title net-desc">
+              <title id="net-title">Network connections</title>
+              <desc id="net-desc">Your PC contains the worker, the local API on port 4318 and LM Studio on port 1234. The only outside connection is a read-only link to the Gmail API. Hosted AI and telemetry are not used.</desc>
+              <rect class="pc" x="10" y="80" width="340" height="270" rx="14" stroke-width="2"/>
+              <text class="t" x="30" y="108">Your Windows PC</text>
+              <rect class="box" x="30" y="128" width="140" height="64" rx="8"/>
+              <text class="t" x="44" y="155">Worker</text>
+              <text class="s" x="44" y="175">scheduled sync</text>
+              <rect class="box" x="190" y="128" width="140" height="64" rx="8"/>
+              <text class="t" x="204" y="155">LM Studio</text>
+              <text class="s" x="204" y="175">127.0.0.1:1234</text>
+              <rect class="box" x="30" y="222" width="140" height="64" rx="8"/>
+              <text class="t" x="44" y="249">SQLite</text>
+              <text class="s" x="44" y="269">data\ folder</text>
+              <rect class="box" x="190" y="222" width="140" height="64" rx="8"/>
+              <text class="t" x="204" y="249">App and API</text>
+              <text class="s" x="204" y="269">127.0.0.1:4318</text>
+              <path class="lnk" d="M170 160h20"/>
+              <path class="lnk" d="M100 192v30"/>
+              <path class="lnk" d="M170 254h20"/>
+              <text class="s" x="30" y="322">Every arrow inside stays on loopback.</text>
+
+              <rect class="box" x="380" y="10" width="130" height="64" rx="8"/>
+              <text class="t" x="394" y="37">Gmail API</text>
+              <text class="s" x="394" y="57">gmail.readonly</text>
+              <path class="lnk" d="M155 128V42h225"/>
+
+              <rect class="box" x="380" y="190" width="130" height="64" rx="8" stroke-dasharray="4 4"/>
+              <text class="t" x="394" y="217">Cloud AI</text>
+              <text class="s" x="394" y="237">telemetry, ads</text>
+              <path class="no" d="M330 222h50"/>
+              <text class="no-t" x="392" y="276">Never contacted</text>
+            </svg>
+            <figcaption>
+              Model URLs that aren't on loopback are refused unless you deliberately allow them. The
+              local API refuses to start on any other address.
+            </figcaption>
+          </figure>
+
+          <ul class="guarantees">
+            <li>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <div>
+                <h3>Read-only, and only your bank's mail</h3>
+                <p>The Gmail scope is <code>gmail.readonly</code>. Only messages from your bank's sender are listed. The History API is deliberately not used, because it would expose unrelated mail.</p>
+              </div>
+            </li>
+            <li>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>
+              <div>
+                <h3>AI that runs on your graphics card</h3>
+                <p>Extraction and category suggestions use a 3B-parameter model in LM Studio, about 2 GB on disk. Bank text is never sent to a hosted model.</p>
+              </div>
+            </li>
+            <li>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+              <div>
+                <h3>A locked-down local API</h3>
+                <p>Host and Origin allow-lists stop DNS rebinding and cross-site requests. There is no generic SQL, file or shell endpoint, and the UI loads nothing from third parties.</p>
+              </div>
+            </li>
+            <li>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 15l4 4M21 15l-4 4"/></svg>
+              <div>
+                <h3>Only what's needed is kept</h3>
+                <p>Logs are redacted and never contain email bodies. Excluded messages keep metadata only. Secrets, databases, backups and exports are all Git-ignored.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accuracy -->
+    <section class="section band" id="accuracy" aria-labelledby="accuracy-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="accuracy-title">Honest about what the model can do</h2>
+          <p>
+            Small local models make mistakes. ExpenseTracker is designed so that a mistake becomes a
+            question in your review queue, never a wrong number in your ledger.
+          </p>
+        </div>
+
+        <div class="accuracy">
+          <div>
+            <h3>Extraction</h3>
+            <p>
+              Measured on 14 synthetic cases, three runs each, with <code>mistralai/ministral-3-3b</code>
+              and the second prompt version. Every miss was an empty merchant, which goes to review; the
+              model never invented a value.
+            </p>
+            <div class="meter">
+              <div class="meter-head"><span>Amount and currency exact</span><b>100%</b></div>
+              <div class="meter-track"><i style="width: 100%"></i></div>
+            </div>
+            <div class="meter">
+              <div class="meter-head"><span>All three fields exact</span><b>85.7%</b></div>
+              <div class="meter-track"><i style="width: 85.7%"></i></div>
+            </div>
+            <p style="font-size: 15px">
+              Median 413 ms per email. Known isybank sentences now skip the model entirely and are read
+              by exact templates, so model variance only matters for new wording.
+            </p>
+          </div>
+          <div>
+            <h3>Categories</h3>
+            <p>
+              On 52 labelled merchants the model picks the right category 69% of the time. That's below
+              the 90% bar for trusting it alone, so suggestions are marked for review by default.
+            </p>
+            <div class="meter">
+              <div class="meter-head"><span>Top-1 category accuracy</span><b>69.2%</b></div>
+              <div class="meter-track"><i class="weak" style="width: 69.2%"></i></div>
+            </div>
+            <div class="meter">
+              <div class="meter-head"><span>Target for auto-accept</span><b>90%</b></div>
+              <div class="meter-track"><i class="weak" style="width: 90%; opacity: 0.45"></i></div>
+            </div>
+            <p style="font-size: 15px">
+              Confirm a merchant once and it becomes a rule, applied automatically from then on. Instant
+              transfers are always filed under Trasferimenti without asking the model.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolkit -->
+    <section class="section" id="more" aria-labelledby="more-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="more-title">Everything around the ledger</h2>
+        </div>
+
+        <div class="toolkit">
+          <div class="tool">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+            <div>
+              <h3>Export to CSV, Excel and PDF</h3>
+              <p>Export exactly what your filters show. Spreadsheet formulas are neutralized against CSV injection, and Excel cells are written with real types.</p>
+            </div>
+          </div>
+          <div class="tool">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div>
+              <h3>Hourly sync with Task Scheduler</h3>
+              <p>A ready PowerShell script registers an hourly task for your user only. A failed run never moves the sync cursor, so nothing is skipped.</p>
+            </div>
+          </div>
+          <div class="tool">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+            <div>
+              <h3>Backups you can trust</h3>
+              <p>Online, integrity-checked SQLite backups with one command, and a matching restore. Duplicate emails are impossible: each Gmail message is stored once.</p>
+            </div>
+          </div>
+          <div class="tool">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+            <div>
+              <h3>Retries and reprocessing</h3>
+              <p>Per-message failures retry within a budget. Re-run extraction on stored messages after changing the model or prompt, without contacting Gmail.</p>
+            </div>
+          </div>
+          <div class="tool">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+            <div>
+              <h3>Configured, not coded</h3>
+              <p>Swap the model, prompt, sync window or sender in <code>.env</code>. Every setting is validated at startup, and errors name the setting, never its value.</p>
+            </div>
+          </div>
+          <div class="tool">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21.5h11.6a2 2 0 0 0 1.7-3L14 9V3"/><path d="M7 15h10"/></svg>
+            <div>
+              <h3>Try it without Gmail</h3>
+              <p>A demo mode seeds a separate database with synthetic transactions, so you can explore the interface before connecting anything.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get started -->
+    <section class="section band" id="start" aria-labelledby="start-title">
+      <div class="wrap start">
+        <div>
+          <h2 id="start-title">Get it running on your PC</h2>
+          <p>
+            You need Windows 11, Node.js 24, LM Studio and a Google account that receives your bank's
+            notifications. The setup guide walks through the Google Cloud console step by step.
+          </p>
+          <a class="btn btn-primary" href="./setup.html">Open the setup guide</a>
+        </div>
+        <pre class="console" aria-label="Quick start commands"><span class="p">&gt; </span>npm ci
+<span class="p">&gt; </span>copy .env.example .env
+<span class="p">&gt; </span>lms get mistralai/ministral-3-3b
+<span class="p">&gt; </span>npm run worker -- auth        <span class="c"># once</span>
+<span class="p">&gt; </span>npm run worker -- sync --dry-run
+<span class="p">&gt; </span>npm run worker -- sync
+<span class="p">&gt; </span>npm run build; npm run api   <span class="c"># 127.0.0.1:4318</span></pre>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-links">
-      <a href="./privacy.html">Privacy Policy</a>
-      <span>|</span>
-      <a href="./terms.html">Terms of Service</a>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>&copy; <span data-year>2026</span> ExpenseTracker. A personal, local-first project.</p>
+      <nav aria-label="Footer">
+        <a href="./setup.html">Setup guide</a>
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms of Service</a>
+      </nav>
     </div>
-
-    <p>&copy; 2026 ExpenseTracker. All rights reserved.</p>
   </footer>
+
+  <script src="./assets/theme.js"></script>
+  <script src="./assets/home.js"></script>
 </body>
 </html>
