@@ -74,7 +74,7 @@
           <li><strong>Node.js 24 LTS</strong> and npm 11. Check with <code>node --version</code>.</li>
           <li><strong>LM Studio</strong> with its local server enabled. It listens on <code>http://127.0.0.1:1234</code>.</li>
           <li>A <strong>GPU with about 3 GB of free VRAM</strong> for the default model.</li>
-          <li>A <strong>Google account</strong> that receives your isybank payment notifications.</li>
+          <li>A <strong>Google account</strong> that receives your &lt;my-bank-name&gt; payment notifications.</li>
         </ul>
 
         <h2 id="install">Install</h2>
@@ -138,10 +138,10 @@ Get-Content .\logs\scheduled-sync.log -Tail 5</pre>
         <p>Everything lives in <code>.env</code> and is validated at startup. The ones you're most likely to change:</p>
         <div class="table-scroll">
           <table class="data">
-            <thead><tr><th scope="col">Setting</th><th scope="col">Default</th><th scope="col">Purpose</th></tr></thead>
+            <thead><tr><th scope="col">Setting</th><th scope="col">Value</th><th scope="col">Purpose</th></tr></thead>
             <tbody>
-              <tr><td><code>ET_GMAIL_QUERY</code></td><td><code>from:comunicazioni@isybank.com</code></td><td>Which messages are listed.</td></tr>
-              <tr><td><code>ET_GMAIL_ALLOWED_SENDERS</code></td><td><code>comunicazioni@isybank.com</code></td><td>Mail from anyone else is never treated as an expense.</td></tr>
+              <tr><td><code>ET_GMAIL_QUERY</code></td><td><code>from:&lt;my-bank-email&gt;</code></td><td>Which messages are listed.</td></tr>
+              <tr><td><code>ET_GMAIL_ALLOWED_SENDERS</code></td><td><code>&lt;my-bank-email&gt;</code></td><td>Mail from anyone else is never treated as an expense.</td></tr>
               <tr><td><code>ET_GMAIL_INITIAL_LOOKBACK_DAYS</code></td><td><code>90</code></td><td>How far back the first sync reads.</td></tr>
               <tr><td><code>ET_EXTRACTION_MODEL</code></td><td><code>mistralai/ministral-3-3b</code></td><td>Must match <code>lms ls</code> exactly.</td></tr>
               <tr><td><code>ET_EXTRACTION_TEMPLATES</code></td><td><code>true</code></td><td>Read known bank sentences without the model.</td></tr>
