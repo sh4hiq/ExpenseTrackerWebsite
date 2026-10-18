@@ -19,11 +19,11 @@
   // App tour tabs.
   var captions = {
     'p-over':
-      'The overview opens with one sentence: how much you spent this month. A ribbon and a table break it down by category, with a 12-month trend and your latest movements below.',
+      'The overview opens with one sentence: how much you spent this month. A ribbon and a table break it down by category, with a 12-month trend and your latest transactions below.',
     'p-mov':
       'Every transaction, with filters for month, category, type and status. Open one to correct the merchant or category and read the cleaned email it came from. Amount, date and time always stay as the bank sent them.',
     'p-rev':
-      'Uncertain emails and unconfirmed categories wait here, grouped by merchant so one decision can settle many movements at once.',
+      'Uncertain emails and unconfirmed categories wait here, grouped by merchant so one decision can settle many transactions at once.',
     'p-cat':
       'Rename, reorder or archive categories, and add merchant rules. Rules always apply before the model ever gets a say.',
     'p-his':

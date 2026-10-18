@@ -70,16 +70,16 @@
         <figure class="demo" id="demo" aria-label="Example: a card payment email becomes a ledger entry">
           <article class="mail">
             <dl class="mail-head">
-              <dt>From</dt><dd>comunicazioni@isybank.com</dd>
-              <dt>Subject</dt><dd class="subject">isybank: Pagamento con carta</dd>
+              <dt>From</dt><dd>isybank notifications</dd>
+              <dt>Subject</dt><dd class="subject">Card payment</dd>
               <dt>Date</dt><dd>Sat, 17 Oct 2026 08:42:10 +0200</dd>
             </dl>
             <div class="mail-body">
-              <p>Gentile cliente,</p>
+              <p>Dear customer,</p>
               <p>
-                ti informiamo che è stato richiesto un pagamento di
-                <span class="mark m-price">23,90</span> <span class="mark m-cur">euro</span>
-                con la carta ****4821 presso <span class="mark m-merchant">FORNO ROSSI</span>, MILANO.
+                a payment of
+                <span class="mark m-price">23.90</span> <span class="mark m-cur">euro</span>
+                was requested with your card ****4821 at <span class="mark m-merchant">CORNER BAKERY</span>, MILAN.
               </p>
             </div>
           </article>
@@ -89,17 +89,17 @@
           </div>
 
           <dl class="fields">
-            <div class="field" data-k="price"><dt>Amount</dt><dd>23,90</dd></div>
+            <div class="field" data-k="price"><dt>Amount</dt><dd>23.90</dd></div>
             <div class="field" data-k="currency"><dt>Currency</dt><dd>EUR</dd></div>
-            <div class="field" data-k="merchant"><dt>Merchant</dt><dd>FORNO ROSSI</dd></div>
+            <div class="field" data-k="merchant"><dt>Merchant</dt><dd>CORNER BAKERY</dd></div>
           </dl>
 
           <div class="row">
-            <div class="row-date">sab<strong>17</strong>ott</div>
-            <div class="row-merchant">Forno Rossi</div>
-            <div class="row-amount">−23,90 €</div>
+            <div class="row-date">Sat<strong>17</strong>Oct</div>
+            <div class="row-merchant">Corner Bakery</div>
+            <div class="row-amount">−€23.90</div>
             <div class="row-meta">
-              <span class="chip"><i class="dot" style="background: var(--c1)"></i>Cibo</span>
+              <span class="chip"><i class="dot" style="background: var(--c1)"></i>Food</span>
               <span class="chip">Card payment, 08:42</span>
             </div>
             <div class="row-state"><span class="chip state-ok">Valid</span></div>
@@ -180,7 +180,7 @@
         <div class="section-head">
           <h2 id="tour-title">A calm place to see where the money went</h2>
           <p>
-            The web interface runs on your PC at <code>127.0.0.1:4318</code>, in Italian, and talks
+            The web interface runs on your PC at <code>127.0.0.1:4318</code> and talks
             only to the local API. Six screens cover everything from a monthly overview to the health
             of the local model.
           </p>
@@ -188,12 +188,12 @@
 
         <div class="tour">
           <div class="tabs" role="tablist" aria-label="App screens" aria-orientation="vertical">
-            <button class="tab" role="tab" id="t-over" aria-controls="p-over" aria-selected="true"><strong>Panoramica</strong><span>Monthly overview</span></button>
-            <button class="tab" role="tab" id="t-mov" aria-controls="p-mov" aria-selected="false" tabindex="-1"><strong>Movimenti</strong><span>Every transaction</span></button>
-            <button class="tab" role="tab" id="t-rev" aria-controls="p-rev" aria-selected="false" tabindex="-1"><strong>Da verificare</strong><span>Your review queue</span></button>
-            <button class="tab" role="tab" id="t-cat" aria-controls="p-cat" aria-selected="false" tabindex="-1"><strong>Categorie e regole</strong><span>Categories and merchant rules</span></button>
-            <button class="tab" role="tab" id="t-his" aria-controls="p-his" aria-selected="false" tabindex="-1"><strong>Elaborazioni</strong><span>Sync history</span></button>
-            <button class="tab" role="tab" id="t-set" aria-controls="p-set" aria-selected="false" tabindex="-1"><strong>Stato e impostazioni</strong><span>Health and connections</span></button>
+            <button class="tab" role="tab" id="t-over" aria-controls="p-over" aria-selected="true"><strong>Overview</strong><span>Where this month went</span></button>
+            <button class="tab" role="tab" id="t-mov" aria-controls="p-mov" aria-selected="false" tabindex="-1"><strong>Transactions</strong><span>Search, filter and export</span></button>
+            <button class="tab" role="tab" id="t-rev" aria-controls="p-rev" aria-selected="false" tabindex="-1"><strong>To review</strong><span>Anything uncertain</span></button>
+            <button class="tab" role="tab" id="t-cat" aria-controls="p-cat" aria-selected="false" tabindex="-1"><strong>Categories and rules</strong><span>Your taxonomy and merchant rules</span></button>
+            <button class="tab" role="tab" id="t-his" aria-controls="p-his" aria-selected="false" tabindex="-1"><strong>Sync history</strong><span>Every run and its results</span></button>
+            <button class="tab" role="tab" id="t-set" aria-controls="p-set" aria-selected="false" tabindex="-1"><strong>Status and settings</strong><span>Health and connections</span></button>
           </div>
 
           <div>
@@ -201,20 +201,20 @@
               <div class="screen-bar" aria-hidden="true"><i></i><i></i><i></i><span>127.0.0.1:4318</span></div>
               <div class="screen-body">
                 <div class="rail" aria-hidden="true">
-                  <b>Spese</b>
-                  <span class="on" data-rail="p-over">Panoramica</span>
-                  <span data-rail="p-mov">Movimenti</span>
-                  <span data-rail="p-rev">Da verificare <em>3</em></span>
-                  <span data-rail="p-cat">Categorie</span>
-                  <span data-rail="p-his">Elaborazioni</span>
-                  <span data-rail="p-set">Stato</span>
+                  <b>Expenses</b>
+                  <span class="on" data-rail="p-over">Overview</span>
+                  <span data-rail="p-mov">Transactions</span>
+                  <span data-rail="p-rev">To review <em>3</em></span>
+                  <span data-rail="p-cat">Categories</span>
+                  <span data-rail="p-his">Sync history</span>
+                  <span data-rail="p-set">Status</span>
                 </div>
 
-                <!-- Panoramica -->
+                <!-- Overview -->
                 <div class="pane" role="tabpanel" id="p-over" aria-labelledby="t-over">
-                  <div class="month-nav"><span>Mese precedente</span><span class="cur">ottobre 2026</span><span>Mese successivo</span></div>
-                  <p class="big-sentence">A ottobre hai speso 937,32 €</p>
-                  <p class="sub">18 movimenti, di cui 2 non confermati</p>
+                  <div class="month-nav"><span>Previous month</span><span class="cur">October 2026</span><span>Next month</span></div>
+                  <p class="big-sentence">In October you spent €937.32</p>
+                  <p class="sub">18 transactions, 2 not yet confirmed</p>
                   <div class="ribbon" aria-hidden="true">
                     <i style="flex: 143.8; background: var(--c1)"></i>
                     <i style="flex: 284.1; background: var(--c2)"></i>
@@ -228,116 +228,116 @@
                   <table class="legend">
                     <caption class="visually-hidden">Spending by category, October 2026</caption>
                     <tbody>
-                      <tr><td><i class="sw" style="background: var(--c1)"></i>Cibo</td><td>143,80 €</td><td>15,3%</td></tr>
-                      <tr><td><i class="sw" style="background: var(--c2)"></i>Spesa alimentare</td><td>284,10 €</td><td>30,3%</td></tr>
-                      <tr><td><i class="sw" style="background: var(--c3)"></i>Casa e utenze</td><td>212,40 €</td><td>22,7%</td></tr>
-                      <tr><td><i class="sw" style="background: var(--c4)"></i>Trasporti</td><td>98,50 €</td><td>10,5%</td></tr>
-                      <tr><td><i class="sw" style="background: var(--c5)"></i>Shopping</td><td>89,90 €</td><td>9,6%</td></tr>
-                      <tr><td><i class="sw" style="background: var(--c6)"></i>Salute</td><td>36,65 €</td><td>3,9%</td></tr>
-                      <tr><td><i class="sw" style="background: var(--c7)"></i>Abbonamenti</td><td>41,97 €</td><td>4,5%</td></tr>
-                      <tr><td><i class="sw" style="background: var(--c8)"></i>Trasferimenti</td><td>30,00 €</td><td>3,2%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c1)"></i>Food</td><td>€143.80</td><td>15.3%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c2)"></i>Groceries</td><td>€284.10</td><td>30.3%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c3)"></i>Home and utilities</td><td>€212.40</td><td>22.7%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c4)"></i>Transport</td><td>€98.50</td><td>10.5%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c5)"></i>Shopping</td><td>€89.90</td><td>9.6%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c6)"></i>Health</td><td>€36.65</td><td>3.9%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c7)"></i>Subscriptions</td><td>€41.97</td><td>4.5%</td></tr>
+                      <tr><td><i class="sw" style="background: var(--c8)"></i>Transfers</td><td>€30.00</td><td>3.2%</td></tr>
                     </tbody>
                   </table>
                 </div>
 
-                <!-- Movimenti -->
+                <!-- Transactions -->
                 <div class="pane" role="tabpanel" id="p-mov" aria-labelledby="t-mov" hidden>
-                  <h4>Movimenti</h4>
+                  <h4>Transactions</h4>
                   <p class="sub">Search, filter and sort. Export what you see as CSV, Excel or PDF.</p>
-                  <div class="filters"><span>ottobre 2026</span><span>Tutte le categorie</span><span>Tutti i tipi</span><span>Cerca esercente</span><span>Esporta</span></div>
+                  <div class="filters"><span>October 2026</span><span>All categories</span><span>All types</span><span>Search merchant</span><span>Export</span></div>
                   <table class="mini-table">
-                    <thead><tr><th>Data</th><th>Esercente</th><th>Categoria</th><th class="num">Importo</th></tr></thead>
+                    <thead><tr><th>Date</th><th>Merchant</th><th>Category</th><th class="num">Amount</th></tr></thead>
                     <tbody>
-                      <tr><td>17/10 08:42</td><td>Forno Rossi</td><td>Cibo</td><td class="num">23,90 €</td></tr>
-                      <tr><td>16/10 19:05</td><td>Esselunga</td><td>Spesa alimentare</td><td class="num">64,37 €</td></tr>
-                      <tr><td>15/10 07:58</td><td>ATM Milano</td><td>Trasporti</td><td class="num">2,20 €</td></tr>
-                      <tr><td>14/10 00:00</td><td>Enel Energia</td><td>Casa e utenze</td><td class="num">71,40 €</td></tr>
-                      <tr><td>12/10 13:16</td><td>Farmacia Centrale</td><td>Salute</td><td class="num">12,85 €</td></tr>
-                      <tr><td>10/10 21:30</td><td>Netflix</td><td>Abbonamenti</td><td class="num">13,99 €</td></tr>
+                      <tr><td>Oct 17, 08:42</td><td>Corner Bakery</td><td>Food</td><td class="num">€23.90</td></tr>
+                      <tr><td>Oct 16, 19:05</td><td>FreshMart</td><td>Groceries</td><td class="num">€64.37</td></tr>
+                      <tr><td>Oct 15, 07:58</td><td>City Transit</td><td>Transport</td><td class="num">€2.20</td></tr>
+                      <tr><td>Oct 14, 00:00</td><td>Power &amp; Light Co.</td><td>Home and utilities</td><td class="num">€71.40</td></tr>
+                      <tr><td>Oct 12, 13:16</td><td>Central Pharmacy</td><td>Health</td><td class="num">€12.85</td></tr>
+                      <tr><td>Oct 10, 21:30</td><td>Netflix</td><td>Subscriptions</td><td class="num">€13.99</td></tr>
                     </tbody>
                   </table>
                 </div>
 
-                <!-- Da verificare -->
+                <!-- To review -->
                 <div class="pane" role="tabpanel" id="p-rev" aria-labelledby="t-rev" hidden>
-                  <h4>Da verificare</h4>
+                  <h4>To review</h4>
                   <p class="sub">Anything the pipeline wasn't sure about. Nothing here is guessed.</p>
                   <div class="card-list">
                     <div class="review-card">
-                      <b>Addebito pagamento domiciliato</b>
+                      <b>Direct debit</b>
                       <p>Merchant missing from the model's answer. Fill it in from the email text shown beside it.</p>
-                      <div class="acts"><span class="fake-btn pri">Salva movimento</span><span class="fake-btn">Ignora email</span></div>
+                      <div class="acts"><span class="fake-btn pri">Save transaction</span><span class="fake-btn">Ignore email</span></div>
                     </div>
                     <div class="review-card">
-                      <b>AMZN Mktp IT, suggested: Shopping</b>
-                      <p>Confirm the category once and apply it to all 4 movements from this merchant, with a rule for the future.</p>
-                      <div class="acts"><span class="fake-btn pri">Conferma per tutti</span><span class="fake-btn">Scegli un'altra</span></div>
+                      <b>Online Marketplace, suggested: Shopping</b>
+                      <p>Confirm the category once and apply it to all 4 transactions from this merchant, with a rule for the future.</p>
+                      <div class="acts"><span class="fake-btn pri">Confirm for all</span><span class="fake-btn">Choose another</span></div>
                     </div>
                     <div class="review-card">
-                      <b>Bonifico istantaneo, 150,00 €</b>
+                      <b>Instant transfer, €150.00</b>
                       <p>Initiated, not yet settled. Confirm once the transfer has gone through.</p>
-                      <div class="acts"><span class="fake-btn pri">Conferma</span></div>
+                      <div class="acts"><span class="fake-btn pri">Confirm</span></div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Categorie -->
+                <!-- Categories -->
                 <div class="pane" role="tabpanel" id="p-cat" aria-labelledby="t-cat" hidden>
-                  <h4>Categorie e regole</h4>
-                  <p class="sub">An editable Italian taxonomy, plus rules that always beat the model.</p>
+                  <h4>Categories and rules</h4>
+                  <p class="sub">An editable set of categories, plus rules that always beat the model.</p>
                   <table class="mini-table" style="margin-bottom: 12px">
-                    <thead><tr><th>Categoria</th><th>Descrizione</th></tr></thead>
+                    <thead><tr><th>Category</th><th>Description</th></tr></thead>
                     <tbody>
-                      <tr><td>Cibo</td><td>Ristoranti, bar, consegne a domicilio</td></tr>
-                      <tr><td>Spesa alimentare</td><td>Supermercati, discount, mercati</td></tr>
-                      <tr><td>Casa e utenze</td><td>Affitto, luce, gas, internet</td></tr>
-                      <tr><td>Abbonamenti</td><td>Streaming, software, palestra</td></tr>
+                      <tr><td>Food</td><td>Restaurants, cafés, food delivery</td></tr>
+                      <tr><td>Groceries</td><td>Supermarkets, discount stores, markets</td></tr>
+                      <tr><td>Home and utilities</td><td>Rent, electricity, gas, internet</td></tr>
+                      <tr><td>Subscriptions</td><td>Streaming, software, gym</td></tr>
                     </tbody>
                   </table>
                   <table class="mini-table">
-                    <thead><tr><th>Se l'esercente è</th><th>Allora la categoria è</th></tr></thead>
+                    <thead><tr><th>If the merchant is</th><th>Then the category is</th></tr></thead>
                     <tbody>
-                      <tr><td>ESSELUNGA</td><td>Spesa alimentare</td></tr>
-                      <tr><td>NETFLIX.COM</td><td>Abbonamenti</td></tr>
+                      <tr><td>FRESHMART</td><td>Groceries</td></tr>
+                      <tr><td>NETFLIX.COM</td><td>Subscriptions</td></tr>
                     </tbody>
                   </table>
                 </div>
 
-                <!-- Elaborazioni -->
+                <!-- Sync history -->
                 <div class="pane" role="tabpanel" id="p-his" aria-labelledby="t-his" hidden>
-                  <h4>Elaborazioni</h4>
+                  <h4>Sync history</h4>
                   <p class="sub">Every sync, with what it found and what it did with it.</p>
                   <table class="mini-table">
-                    <thead><tr><th>Avvio</th><th class="num">Email</th><th class="num">Salvati</th><th class="num">Da verificare</th><th>Esito</th></tr></thead>
+                    <thead><tr><th>Started</th><th class="num">Emails</th><th class="num">Saved</th><th class="num">To review</th><th>Result</th></tr></thead>
                     <tbody>
-                      <tr><td>18/10 09:00</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td>Completata</td></tr>
-                      <tr><td>18/10 08:00</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td>Completata</td></tr>
-                      <tr><td>18/10 07:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td>Completata</td></tr>
-                      <tr><td>17/10 23:00</td><td class="num">2</td><td class="num">1</td><td class="num">0</td><td>Modello non disponibile</td></tr>
+                      <tr><td>Oct 18, 09:00</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td>Completata</td></tr>
+                      <tr><td>Oct 18, 08:00</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td>Completata</td></tr>
+                      <tr><td>Oct 18, 07:00</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td>Completata</td></tr>
+                      <tr><td>Oct 17, 23:00</td><td class="num">2</td><td class="num">1</td><td class="num">0</td><td>Model unavailable</td></tr>
                     </tbody>
                   </table>
                 </div>
 
-                <!-- Stato -->
+                <!-- Status -->
                 <div class="pane" role="tabpanel" id="p-set" aria-labelledby="t-set" hidden>
-                  <h4>Stato e impostazioni</h4>
+                  <h4>Status and settings</h4>
                   <p class="sub">Connect Gmail and start the local model without opening a terminal.</p>
                   <dl class="kv">
-                    <dt>Gmail</dt><dd><span class="chip state-ok">Collegato</span> read-only</dd>
-                    <dt>LM Studio</dt><dd><span class="chip state-ok">In esecuzione</span> 127.0.0.1:1234</dd>
-                    <dt>Modello</dt><dd>mistralai/ministral-3-3b</dd>
+                    <dt>Gmail</dt><dd><span class="chip state-ok">Connected</span> read-only</dd>
+                    <dt>LM Studio</dt><dd><span class="chip state-ok">Running</span> 127.0.0.1:1234</dd>
+                    <dt>Model</dt><dd>mistralai/ministral-3-3b</dd>
                     <dt>Database</dt><dd>data\expense-tracker.db</dd>
-                    <dt>Ultima elaborazione</dt><dd>oggi alle 09:00</dd>
+                    <dt>Last sync</dt><dd>Today at 09:00</dd>
                   </dl>
                   <div class="acts" style="display: flex; flex-wrap: wrap; gap: 6px; font-size: var(--t-xs)">
-                    <span class="fake-btn pri">Sincronizza ora</span><span class="fake-btn">Rifai l'autorizzazione</span>
+                    <span class="fake-btn pri">Sync now</span><span class="fake-btn">Re-authorize</span>
                   </div>
                 </div>
               </div>
             </div>
             <p class="tour-caption" id="tour-caption">
               The overview opens with one sentence: how much you spent this month. A ribbon and a table
-              break it down by category, with a 12-month trend and your latest movements below.
+              break it down by category, with a 12-month trend and your latest transactions below.
             </p>
           </div>
         </div>
@@ -350,23 +350,23 @@
         <div class="section-head">
           <h2 id="banks-title">Built for isybank notifications</h2>
           <p>
-            ExpenseTracker understands these six email types today. Subjects may start with
-            <code>isybank:</code> and still match.
+            ExpenseTracker understands these six email types today, including subjects that start with
+            the bank's name.
           </p>
         </div>
 
         <div class="table-scroll">
           <table class="data">
             <thead>
-              <tr><th scope="col">Email subject</th><th scope="col">Saved as</th><th scope="col">Merchant is read from</th></tr>
+              <tr><th scope="col">Notification</th><th scope="col">How it is saved</th><th scope="col">Merchant is read from</th></tr>
             </thead>
             <tbody>
-              <tr><td class="subject">Pagamento con carta</td><td>Card payment</td><td><code>presso …</code> or <code>da …</code></td></tr>
-              <tr><td class="subject">Pagamento con carta virtuale</td><td>Virtual card payment</td><td><code>da …</code></td></tr>
-              <tr><td class="subject">Addebito pagamento domiciliato</td><td>Direct debit</td><td><code>da parte di …</code>, never the account number</td></tr>
-              <tr><td class="subject">Inserimento pagamento bonifico istantaneo</td><td>Instant transfer<br><span class="pill-note">Initiated until you confirm it</span></td><td><code>in favore di …</code> or the masked IBAN</td></tr>
-              <tr><td class="subject">Inserimento pagamento bonifico europeo</td><td>SEPA transfer<br><span class="pill-note">Initiated until you confirm it</span></td><td><code>in favore dell'IBAN …</code></td></tr>
-              <tr><td class="subject">Prelievo contanti … / Prelievo cardless del …</td><td>Cash withdrawal, filed under Contanti</td><td><code>presso …</code> or <code>cassa veloce automatica di …</code></td></tr>
+              <tr><td class="subject">Card payment</td><td>Card payment</td><td>The “at …” or “from …” phrase</td></tr>
+              <tr><td class="subject">Virtual card payment</td><td>Virtual card payment</td><td>The “from …” phrase</td></tr>
+              <tr><td class="subject">Direct debit</td><td>Direct debit</td><td>The “on behalf of …” phrase, never the account number</td></tr>
+              <tr><td class="subject">Instant transfer submitted</td><td>Instant transfer<br><span class="pill-note">Initiated until you confirm it</span></td><td>The “in favor of …” phrase or the masked IBAN</td></tr>
+              <tr><td class="subject">SEPA transfer submitted</td><td>SEPA transfer<br><span class="pill-note">Initiated until you confirm it</span></td><td>The “in favor of IBAN …” phrase</td></tr>
+              <tr><td class="subject">Cash withdrawal, with or without a card</td><td>Cash withdrawal, filed under Cash</td><td>The “at …” phrase or the ATM name</td></tr>
             </tbody>
           </table>
         </div>
@@ -511,7 +511,7 @@
             </div>
             <p style="font-size: 15px">
               Confirm a merchant once and it becomes a rule, applied automatically from then on. Instant
-              transfers are always filed under Trasferimenti without asking the model.
+              transfers are always filed under Transfers without asking the model.
             </p>
           </div>
         </div>

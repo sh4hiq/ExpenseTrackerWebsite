@@ -88,7 +88,7 @@ npm run check              <span class="c"># format, lint, typecheck, tests, bui
 lms load mistralai/ministral-3-3b --context-length 4096 --gpu max
 lms ls                      <span class="c"># the model must be listed</span>
 npm run worker -- health    <span class="c"># checks LM Studio and the model ID</span></pre>
-        <p>You can also start LM Studio and load the model from the app: open <strong>Stato e impostazioni</strong> and choose <strong>Avvia LM Studio e carica il modello</strong>. If the <code>lms</code> command lives somewhere unusual, set <code>ET_LMS_PATH</code>.</p>
+        <p>You can also start LM Studio and load the model from the app: open <strong>Status and settings</strong> and choose <strong>Start LM Studio and load the model</strong>. If the <code>lms</code> command lives somewhere unusual, set <code>ET_LMS_PATH</code>.</p>
 
         <h2 id="gmail">Gmail access</h2>
         <p>You do this once. ExpenseTracker uses your own Google Cloud project, so no one else ever holds a token for your mailbox.</p>
@@ -99,7 +99,7 @@ npm run worker -- health    <span class="c"># checks LM Studio and the model ID<
           <li>Save it as <code>secrets\credentials.json</code>. This folder is Git-ignored.</li>
           <li>Run <code>npm run worker -- auth</code>, open the printed address and approve <strong>read-only</strong> access. The token is saved to <code>secrets\token.json</code>.</li>
         </ol>
-        <p>You can also connect from the app with <strong>Collega Gmail</strong> in <strong>Stato e impostazioni</strong>.</p>
+        <p>You can also connect from the app with <strong>Connect Gmail</strong> in <strong>Status and settings</strong>.</p>
         <div class="notice">
           While the consent screen is in <strong>Testing</strong>, Google expires the token after 7 days and syncs will report a <code>gmail_auth</code> error. Set the publishing status to <strong>In production</strong> to avoid weekly re-authorization. The app can stay unverified for personal use.
         </div>
