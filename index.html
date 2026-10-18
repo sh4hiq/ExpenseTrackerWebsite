@@ -1,0 +1,176 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ExpenseTracker is a personal application for organizing expenses from Gmail.">
+  <title>ExpenseTracker — Personal Expense Tracking</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #596579;
+      --accent: #3567e8;
+      --line: #e5e9f0;
+      --bg: #f7f9fc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    header, main, footer {
+      width: min(900px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    header {
+      padding: 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      font-weight: 750;
+      font-size: 1.15rem;
+      letter-spacing: -.03em;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .hero { padding: 80px 0 70px; }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: .5rem 0 1rem;
+      font-size: clamp(2.5rem, 7vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: -.055em;
+    }
+
+    .lead {
+      max-width: 650px;
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      font-size: .9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 10px 0 70px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    h2 { letter-spacing: -.025em; }
+
+    .card p { color: var(--muted); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 36px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">ExpenseTracker</div>
+    <nav>
+      <a href="./privacy.html">Privacy Policy</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Personal · Local-first</div>
+
+      <h1>Understand your expenses, with less manual work.</h1>
+
+      <p class="lead">
+        ExpenseTracker is a personal application designed to help its
+        owner organize expense information from email receipts and
+        notifications.
+      </p>
+
+      <span class="pill">Runs locally on the owner's computer</span>
+    </section>
+
+    <section class="grid" aria-label="Application principles">
+      <article class="card">
+        <h2>Gmail Integration</h2>
+        <p>
+          With the owner's explicit authorization, the application uses
+          Google OAuth and the Gmail API to read email data needed for
+          its expense-tracking workflow.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Personal Use</h2>
+        <p>
+          The application is intended for the owner's private use.
+          It is not offered as a public service to other users.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>Privacy</h2>
+        <p>
+          The application is designed to process data locally on the
+          owner's computer, except for communications required by
+          Google APIs or any additional services explicitly configured.
+          See the privacy policy for details.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <span>ExpenseTracker · Personal project</span>
+    <a href="./privacy.html">Privacy Policy</a>
+  </footer>
+</body>
+</html>
